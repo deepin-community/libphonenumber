@@ -1,0 +1,5 @@
+libphonenumber (8.12.16-deepin) stable; urgency=medium
+
+  * ['Rebuild  against by  current gcc 11.2']
+
+ -- Deepin Packages Builder <packages@deepin.org>  Thu, 18 Aug 2022 16:26:59 +0800

@@ -1,0 +1,26 @@
+--- a/tools/cpp/src/cpp-build/generate_geocoding_data.cc
++++ b/tools/cpp/src/cpp-build/generate_geocoding_data.cc
+@@ -88,6 +88,7 @@ class DirEntry {
+ 
+   const std::string& name() const { return name_; }
+   DirEntryKinds kind() const { return kind_; }
++  bool operator<(const DirEntry& d) { return name_ < d.name() || kind_ < d.kind(); }
+ 
+  private:
+   std::string name_;
+@@ -115,6 +116,7 @@ bool ListDirectory(const string& path, v
+     errno = 0;
+     entry = readdir(dir);
+     if (entry == NULL) {
++      std::sort(entries->begin(), entries->end());
+       return errno == 0;
+     }
+     if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
+@@ -122,6 +124,7 @@ bool ListDirectory(const string& path, v
+     }
+     const string entry_path = path + "/" + entry->d_name;
+     if (stat(entry_path.c_str(), &entry_stat)) {
++      std::sort(entries->begin(), entries->end());
+       return false;
+     }
+     DirEntryKinds kind = kFile;
